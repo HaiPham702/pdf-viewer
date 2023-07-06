@@ -37,7 +37,6 @@
 /******/ 			l: false,
 /******/ 			exports: {}
 /******/ 		};
-/******/
 /******/ 		// Execute the module function
 /******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 /******/
@@ -256,6 +255,7 @@ function getViewerConfiguration() {
 
 function webViewerLoad() {
   var config = getViewerConfiguration();
+  debugger
   window.PDFViewerApplication = pdfjsWebApp.PDFViewerApplication;
   window.PDFViewerApplicationOptions = pdfjsWebAppOptions.AppOptions;
   var event = document.createEvent('CustomEvent');
@@ -1207,6 +1207,7 @@ var PDFViewerApplication = {
     this.pdfLinkService.setDocument(pdfDocument, baseDocumentUrl);
     this.pdfDocumentProperties.setDocument(pdfDocument, this.url);
     var pdfViewer = this.pdfViewer;
+    debugger
     pdfViewer.setDocument(pdfDocument);
     var firstPagePromise = pdfViewer.firstPagePromise;
     var pagesPromise = pdfViewer.pagesPromise;
@@ -1271,7 +1272,7 @@ var PDFViewerApplication = {
                       spreadMode = values.spreadMode | 0;
                     }
                   }
-
+                  debugger
                   //$FB: prevent start in bookflip mode
                   if(scrollMode === _ui_utils.ScrollMode.FLIP) {
                     scrollMode = _ui_utils.ScrollMode.VERTICAL;
@@ -1792,6 +1793,7 @@ function loadAndEnablePDFBug(enabledTabs) {
 }
 
 function webViewerInitialized() {
+  debugger
   var appConfig = PDFViewerApplication.appConfig;
   var file;
   var queryString = document.location.search.substring(1);
@@ -9488,6 +9490,7 @@ function () {
       }
 
       pdfDocument.getPage(1).then(function (firstPage) {
+        debugger
         var pagesCount = pdfDocument.numPages;
         var viewport = firstPage.getViewport({
           scale: 1

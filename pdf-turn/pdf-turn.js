@@ -22,13 +22,14 @@ var bookFlip = {
 		$(document).on('rotationchanging', () => {this.rotate()});
 		$(document).on('scalechanging', () => {this.resize()});
 		$(document).on('pagechanging', () => {this.flip()});
-		
+		debugger
 		$(document).on('documentinit', () => {
 			this.stop();
 			this._ready = false;
 		});
 
 		$(document).on('scrollmodechanged', () => {
+			debugger
 			var scroll = PDFViewerApplication.pdfViewer.scrollMode;
 			if (scroll === 3)this.start();
 			else this.stop();
@@ -61,6 +62,7 @@ var bookFlip = {
 	},
 	// startup flipbook
 	start: function(){
+		debugger
 		if(this.active || !this._ready)return;
 		this.active = true;
 		
@@ -99,6 +101,8 @@ var bookFlip = {
 				this._spread = 0;
 			}
 		}
+
+		debugger
 		
 		$('#viewer').turn({
 			elevation: 50,
