@@ -255,7 +255,6 @@ function getViewerConfiguration() {
 
 function webViewerLoad() {
   var config = getViewerConfiguration();
-  debugger
   window.PDFViewerApplication = pdfjsWebApp.PDFViewerApplication;
   window.PDFViewerApplicationOptions = pdfjsWebAppOptions.AppOptions;
   var event = document.createEvent('CustomEvent');
@@ -1207,7 +1206,6 @@ var PDFViewerApplication = {
     this.pdfLinkService.setDocument(pdfDocument, baseDocumentUrl);
     this.pdfDocumentProperties.setDocument(pdfDocument, this.url);
     var pdfViewer = this.pdfViewer;
-    debugger
     pdfViewer.setDocument(pdfDocument);
     var firstPagePromise = pdfViewer.firstPagePromise;
     var pagesPromise = pdfViewer.pagesPromise;
@@ -1272,7 +1270,6 @@ var PDFViewerApplication = {
                       spreadMode = values.spreadMode | 0;
                     }
                   }
-                  debugger
                   //$FB: prevent start in bookflip mode
                   if(scrollMode === _ui_utils.ScrollMode.FLIP) {
                     scrollMode = _ui_utils.ScrollMode.VERTICAL;
@@ -1793,7 +1790,6 @@ function loadAndEnablePDFBug(enabledTabs) {
 }
 
 function webViewerInitialized() {
-  debugger
   var appConfig = PDFViewerApplication.appConfig;
   var file;
   var queryString = document.location.search.substring(1);
@@ -4932,7 +4928,6 @@ function () {
 
       for (var pageIndex = 0; pageIndex < pagesCount; pageIndex++) {
         var pageView = pdfViewer.getPageView(pageIndex);
-
         if (pageView && pageView.renderingState === _pdf_rendering_queue.RenderingStates.FINISHED) {
           var thumbnailView = pdfThumbnailViewer.getThumbnail(pageIndex);
           thumbnailView.setImage(pageView);
@@ -5134,7 +5129,7 @@ var defaultOptions = {
     kind: OptionKind.VIEWER
   },
   defaultUrl: {
-    value: 'compressed.tracemonkey-pldi-09.pdf',
+    value: 'input.pdf',
     kind: OptionKind.VIEWER
   },
   defaultZoomValue: {
@@ -9490,7 +9485,6 @@ function () {
       }
 
       pdfDocument.getPage(1).then(function (firstPage) {
-        debugger
         var pagesCount = pdfDocument.numPages;
         var viewport = firstPage.getViewport({
           scale: 1
@@ -9542,6 +9536,7 @@ function () {
       }
 
       for (var i = 0, ii = this._thumbnails.length; i < ii; i++) {
+
         var label = this._pageLabels && this._pageLabels[i];
 
         this._thumbnails[i].setPageLabel(label);
@@ -9579,7 +9574,6 @@ function () {
       var _this3 = this;
 
       var visibleThumbs = this._getVisibleThumbs();
-
       var thumbView = this.renderingQueue.getHighestPriority(visibleThumbs, this._thumbnails, this.scroll.down);
 
       if (thumbView) {
@@ -9611,7 +9605,6 @@ function () {
       }
 
       this._pagesRotation = rotation;
-
       for (var i = 0, ii = this._thumbnails.length; i < ii; i++) {
         this._thumbnails[i].update(rotation);
       }
@@ -9735,7 +9728,6 @@ function () {
       linkService.page = id;
       return false;
     };
-
     this.anchor = anchor;
     var div = document.createElement('div');
     div.className = 'thumbnail';
@@ -9847,7 +9839,7 @@ function () {
     key: "_convertCanvasToImage",
     value: function _convertCanvasToImage() {
       var _this = this;
-
+      debugger
       if (!this.canvas) {
         return;
       }
@@ -9932,9 +9924,11 @@ function () {
 
       var renderContinueCallback = function renderContinueCallback(cont) {
         if (!_this2.renderingQueue.isHighestPriority(_this2)) {
+          debugger
           _this2.renderingState = _pdf_rendering_queue.RenderingStates.PAUSED;
 
           _this2.resume = function () {
+            debugger
             _this2.renderingState = _pdf_rendering_queue.RenderingStates.RUNNING;
             cont();
           };
@@ -9980,7 +9974,6 @@ function () {
       var ctx = this._getPageDrawContext(true);
 
       var canvas = ctx.canvas;
-
       if (img.width <= 2 * canvas.width) {
         ctx.drawImage(img, 0, 0, img.width, img.height, 0, 0, canvas.width, canvas.height);
 
@@ -9988,7 +9981,6 @@ function () {
 
         return;
       }
-
       var reducedWidth = canvas.width << MAX_NUM_SCALING_STEPS;
       var reducedHeight = canvas.height << MAX_NUM_SCALING_STEPS;
       var reducedImage = TempImageFactory.getCanvas(reducedWidth, reducedHeight);
@@ -10435,7 +10427,6 @@ function () {
           if (_this2.textLayerMode !== _ui_utils.TextLayerMode.DISABLE) {
             textLayerFactory = _this2;
           }
-
           var pageView = new _pdf_page_view.PDFPageView({
             container: _this2._setDocumentViewerElement,
             eventBus: _this2.eventBus,
@@ -11676,7 +11667,7 @@ function () {
         scale: this.scale * _ui_utils.CSS_UNITS,
         rotation: totalRotation
       });
-
+      debugger
       if (this.svg) {
         this.cssTransform(this.svg, true);
         this.eventBus.dispatch('pagerendered', {
@@ -11696,7 +11687,7 @@ function () {
           isScalingRestricted = true;
         }
       }
-
+      debugger
       if (this.canvas) {
         if (this.useOnlyCssZoom || this.hasRestrictedScaling && isScalingRestricted) {
           this.cssTransform(this.canvas, true);
@@ -11836,6 +11827,7 @@ function () {
       }
 
       if (!this.pdfPage) {
+        debugger
         this.renderingState = _pdf_rendering_queue.RenderingStates.FINISHED;
         return Promise.reject(new Error('Page is not loaded'));
       }
@@ -11877,9 +11869,11 @@ function () {
       if (this.renderingQueue) {
         renderContinueCallback = function renderContinueCallback(cont) {
           if (!_this.renderingQueue.isHighestPriority(_this)) {
+            debugger
             _this.renderingState = _pdf_rendering_queue.RenderingStates.PAUSED;
 
             _this.resume = function () {
+              debugger
               _this.renderingState = _pdf_rendering_queue.RenderingStates.RUNNING;
               cont();
             };
@@ -11914,6 +11908,7 @@ function () {
                   return _context.abrupt("return");
 
                 case 4:
+                  debugger
                   _this.renderingState = _pdf_rendering_queue.RenderingStates.FINISHED;
 
                   if (_this.loadingIconDiv) {
@@ -12014,7 +12009,6 @@ function () {
           isCanvasHidden = false;
         }
       };
-
       canvasWrapper.appendChild(canvas);
       this.canvas = canvas;
       canvas.mozOpaque = true;
@@ -15392,6 +15386,7 @@ PDFPrintService.prototype = {
     return new Promise(renderNextPage);
   },
   useRenderedPage: function useRenderedPage(printItem) {
+    debugger
     this.throwIfInactive();
     var img = document.createElement('img');
     img.style.width = printItem.width;

@@ -11691,6 +11691,7 @@ function () {
             var tmpCanvas = document.createElement('canvas');
             tmpCanvas.width = width;
             tmpCanvas.height = height;
+            debugger
             var tmpCtx = tmpCanvas.getContext('2d');
             tmpCtx.drawImage(img, 0, 0);
             var data = tmpCtx.getImageData(0, 0, width, height).data;
@@ -12909,6 +12910,7 @@ function () {
       }
 
       var canvas = document.createElement('canvas');
+      debugger
       var context = canvas.getContext('2d');
       canvas.width = width;
       canvas.height = height;
@@ -13627,6 +13629,7 @@ exports.FontLoader = FontLoader;
         var canvas = document.createElement('canvas');
         canvas.width = 1;
         canvas.height = 1;
+        debugger
         var ctx = canvas.getContext('2d');
         var called = 0;
 
@@ -20818,7 +20821,7 @@ exports.SVGGraphics = SVGGraphics;
           var fn = opTree[x].fn;
           var fnId = opTree[x].fnId;
           var args = opTree[x].args;
-
+          debugger
           switch (fnId | 0) {
             case _util.OPS.beginText:
               this.beginText();
