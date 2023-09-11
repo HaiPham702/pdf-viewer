@@ -3540,6 +3540,7 @@ function getOutputScale(ctx) {
 }
 
 function scrollIntoView(element, spot) {
+  debugger
   var skipOverflowHiddenElements = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
   var parent = element.offsetParent;
 
